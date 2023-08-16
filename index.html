@@ -27,9 +27,32 @@
     <style
       data-href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
     >
+    /* Style for the pop-up message */
+.popup-message {
+  display: none;
+  position: fixed;
+  height: 50%;
+  width: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(141, 79, 255);
+  border: 1px solid #ffe2e2;
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+}
+
+.popup-cancel {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  cursor: pointer;
+}
+
     </style>
   </head>
-  <body class="dark opened content-hidden" style="background-color: rgb(0, 0, 0);">
+  <body class="dark opened content-hidden" style="background-color: #080827;">
     <div class="content">
       <div class="loading">
           <span></span>
@@ -144,7 +167,7 @@
               style="background-image: url('img/slider/2.jpg')"
             ></div>
             <div class="container">
-              <div class="content" style="background-color: #000;">
+              <div class="content">
                 <div class="details">
                   <div class="hello">
                     <h3 class="orangeText">Hello, I'm</h3>
@@ -2273,10 +2296,12 @@
                     style="visibility: visible; animation-duration: 1s"
                   >
                     <div class="field">
-                      <input type="text" placeholder="Your email here" /><input
-                        type="submit"
-                        value="Send Now"
-                      />
+                      <input type="text" placeholder="Your email here" id="submitNewBtn" />
+                      <input type="submit" value="Send" id="subscribeBtn" />
+                    </div>
+                    <div class="popup-message" id="popupMessage">
+                      <span  class="popup-cancel" id="popupCancel"><p>x</p></span>
+                      <p>Subscribed</p>
                     </div>
                   </div>
                 </div>
@@ -2310,7 +2335,7 @@
                         </div>
                         <div class="short">
                           <h3>Address</h3>
-                          <span>20, Somewhere in world</span>
+                          <span>Somewhere in world</span>
                         </div>
                       </div>
                     </li>
@@ -2348,67 +2373,66 @@
                   style="visibility: visible; animation-duration: 1s"
                 >
                   <div class="fields">
-                    <form
-                      action="#"
-                      method="post"
-                      class="contact_form"
-                      id="contact_form"
-                      autocomplete="off"
-                    >
-                      <div
-                        class="returnmessage"
-                        data-success="Your message has been received, We will contact you soon."
-                      ></div>
-                      <div class="empty_notice">
-                        <span>Please Fill Required Fields</span>
-                      </div>
-                      <div class="input_list">
-                        <ul>
-                          <li>
-                            <input
-                              type="text"
-                              id="name"
-                              placeholder="Your Name"
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              id="email"
-                              placeholder="Your Email"
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="number"
-                              id="phone"
-                              placeholder="Your Phone"
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              id="subject"
-                              placeholder="Subject"
-                            />
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="message_area">
-                        <textarea
-                          id="message"
-                          placeholder="Write your message here"
-                        ></textarea>
-                      </div>
-                      <div class="dizme_tm_button">
-                        <a
-                          id="showPopupBtn"
-                          ><span>Submit Now</span></a
-                        >
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                  <form
+                    action="#"
+                    method="post"
+                    class="contact_form"
+                    id="contact_frm"
+                    autocomplete="off"
+                  >
+                    <div class="input_list">
+                      <ul>
+                        <li>
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Full name"
+                            required
+                          />
+                        </li>
+                        <li>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="email id"
+                            required
+                          />
+                        </li>
+                        <li>
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="mobile"
+                            required
+                          />
+                        </li>
+                        <li>
+                          <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder="Subject"
+                            required
+                          />
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="message_area">
+                      <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message here"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="dizme_tm_button">
+                      <a id="submitBtn" href=""><span>Submit</span></a>
+                    </div>
+                  </form>
+</div>
                 <div
                   class="brush_2 wow fadeInRight"
                   data-wow-duration="1s"
@@ -2467,10 +2491,6 @@
               <p class="text" style="position: relative; bottom: 10px; transform: rotate(90deg); font-size: 8px; color: #333; letter-spacing: 1px; font-size: 10px; padding: 0px 10px; border-radius: 20px; border: 2px solid #ff4646;">toTOP</p>
           </a>
     </div>
-    <div id="popup" class="hidden">
-      <img src="your-image-url.jpg" alt="Popup Image">
-      <span id="closePopupBtn" class="close-icon">&times;</span>
-    </div>
     <next-route-announcer
       ><p
         aria-live="assertive"
@@ -2490,6 +2510,35 @@
         "
       ></p
     ></next-route-announcer>
+<script>
+
+const submitButton = document.getElementById("submitBtn");
+  
+  submitButton.addEventListener("click", function() {
+    // Change the text and add a tick mark when the button is clicked
+    const buttonText = submitButton.querySelector("span");
+    buttonText.textContent = "Success";
+    buttonText.classList.add("success");
+    setTimeout(function() {
+    location.reload(); // Refresh the page after the pop-up is closed
+  }, 100);
+  });
+
+  const subscribeBtn = document.getElementById('subscribeBtn');
+const popupMessage = document.getElementById('popupMessage');
+const popupCancel = document.getElementById('popupCancel');
+
+subscribeBtn.addEventListener('click', () => {
+  popupMessage.style.display = 'block';
+});
+
+popupCancel.addEventListener('click', () => {
+  popupMessage.style.display = 'none';
+  location.reload();
+});
+
+
+</script>
 <script type="text/javascript">
   options = {
 "cursorOuter": "circle-basic",
